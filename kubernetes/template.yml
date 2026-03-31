@@ -1,0 +1,285 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 앱
+  labels:
+    app: 앱
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 앱
+  template:
+    metadata:
+      labels:
+        app: 앱
+    spec:
+      containers:
+        - name: 앱
+          image: username/앱:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 가게
+  labels:
+    app: 가게
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 가게
+  template:
+    metadata:
+      labels:
+        app: 가게
+    spec:
+      containers:
+        - name: 가게
+          image: username/가게:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 결제
+  labels:
+    app: 결제
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 결제
+  template:
+    metadata:
+      labels:
+        app: 결제
+    spec:
+      containers:
+        - name: 결제
+          image: username/결제:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 배달
+  labels:
+    app: 배달
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 배달
+  template:
+    metadata:
+      labels:
+        app: 배달
+    spec:
+      containers:
+        - name: 배달
+          image: username/배달:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: BoundedContext1216
+  labels:
+    app: BoundedContext1216
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: BoundedContext1216
+  template:
+    metadata:
+      labels:
+        app: BoundedContext1216
+    spec:
+      containers:
+        - name: BoundedContext1216
+          image: username/BoundedContext1216:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: 앱
+  labels:
+    app: 앱
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: 앱
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: 가게
+  labels:
+    app: 가게
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: 가게
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: 결제
+  labels:
+    app: 결제
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: 결제
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: 배달
+  labels:
+    app: 배달
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: 배달
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: BoundedContext1216
+  labels:
+    app: BoundedContext1216
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: BoundedContext1216
+

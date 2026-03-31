@@ -1,0 +1,92 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+#<<< API Gateway / Routes
+      routes:
+        - id: 앱
+          uri: http://localhost:8082
+          predicates:
+            - Path=/주문/**, 
+        - id: 가게
+          uri: http://localhost:8083
+          predicates:
+            - Path=/주문처리/**, 
+        - id: 결제
+          uri: http://localhost:8084
+          predicates:
+            - Path=/결제/**, 
+        - id: 배달
+          uri: http://localhost:8085
+          predicates:
+            - Path=, 
+        - id: BoundedContext1216
+          uri: http://localhost:8086
+          predicates:
+            - Path=, 
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+#>>> API Gateway / Routes
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: 앱
+          uri: http://앱:8080
+          predicates:
+            - Path=/주문/**, 
+        - id: 가게
+          uri: http://가게:8080
+          predicates:
+            - Path=/주문처리/**, 
+        - id: 결제
+          uri: http://결제:8080
+          predicates:
+            - Path=/결제/**, 
+        - id: 배달
+          uri: http://배달:8080
+          predicates:
+            - Path=, 
+        - id: BoundedContext1216
+          uri: http://boundedContext1216:8080
+          predicates:
+            - Path=, 
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 가게
+  labels:
+    app: 가게
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: 가게
